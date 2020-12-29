@@ -1,0 +1,44 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+../header/speaker.h
+iostream
+-
+
+../header/speechManager.h
+iostream
+-
+vector
+-
+map
+-
+algorithm
+-
+deque
+-
+functional
+-
+numeric
+-
+string
+-
+fstream
+-
+speaker.h
+../header/speaker.h
+
+/Users/Apple/CLionProjects/c++test1/main.cpp
+iostream
+-
+speechManager.h
+/Users/Apple/CLionProjects/c++test1/speechManager.h
+
+/Users/Apple/CLionProjects/c++test1/source/speechManager.cpp
+speechManager.h
+/Users/Apple/CLionProjects/c++test1/source/speechManager.h
+
