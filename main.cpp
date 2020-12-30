@@ -26,6 +26,7 @@ int main() {
                 sm.StartSpeech();
                 break;
             case 2:
+                sm.ShowScore();
                 break;
             case 3:
                 break;

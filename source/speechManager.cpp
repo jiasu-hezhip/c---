@@ -8,6 +8,7 @@ SpeechManager::SpeechManager() {
     //初始化
     this->InitSpeaker();
     this->CreateSpeaker();
+    this->LoadScore();
 }
 
 //析构
@@ -145,7 +146,7 @@ void SpeechManager::ShowWin() {
         cout<< this->m_Speaker[*it].m_Name << " ";
     }
     cout<<endl;
-    this->ShowMenu();
+    //成压服务器部署在哪？数据全不全？加密采集策略？目前成压接入的数据？哪些不上传？
 }
 
 //保存分数
@@ -179,4 +180,57 @@ void SpeechManager::StartSpeech() {
     //保存
     this->SaveScore();
     cout<<"本届比赛完毕"<<endl;
+}
+//加载成绩
+void SpeechManager::LoadScore() {
+    ifstream ifs("speech.csv", ios::in);
+    if (!ifs.is_open()){
+        this->fileIsEmpty = true;
+        cout << "文件不存在" << endl;
+        ifs.close();
+        return;
+    }
+    char ch;
+    ifs>>ch;
+    if (ifs.eof()){
+        cout<<"文件为空"<<endl;
+        this->fileIsEmpty = true;
+        ifs.close();
+        return;
+    }
+    this->fileIsEmpty = false;
+    ifs.putback(ch);
+    string data;
+    int index = 0;
+    while (ifs >> data){
+        vector<string> v;
+        int pos = -1;
+        int start = 0;
+
+        while (true){
+            pos = data.find(",",start);
+            if (pos == -1){
+                break;
+            } else{
+                string temp = data.substr(start,pos-start);
+                v.push_back(temp);
+                start = pos+1;
+            }
+        }
+
+        this->m_Record.insert(make_pair(index,v));
+        index++;
+    }
+    ifs.close();
+
+}
+//显示往届成绩
+void SpeechManager::ShowScore() {
+    for (int i=0;i< this->m_Record.size();i++){
+        cout<<"The <" << i+1 << "> Game Score:"<<" "
+        <<"First:" << this->m_Record[i][0] << " " << "Score: "<< this->m_Record[i][1] << " "
+        <<"Second:" << this->m_Record[i][2] << " " << "Score: "<< this->m_Record[i][3] << " "
+        <<"Third:" << this->m_Record[i][4] << " " << "Score: "<< this->m_Record[i][5] << " "
+        <<endl;
+    }
 }

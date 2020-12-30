@@ -42,6 +42,16 @@ public:
     //保存记录
     void SaveScore();
 
+    //加载成绩
+    void LoadScore();
+    //是否有文件
+    bool fileIsEmpty;
+    //往届记录
+    map<int,vector<string>>m_Record;
+
+    //显示往届成绩
+    void ShowScore();
+
     //菜单
     void ShowMenu();
 
